@@ -16,9 +16,11 @@
 		"prettier"
 	],
 	"plugins": [
+		"@typescript-eslint",
 		"import",
 		"prettier"
 	],
+	"parser": "@typescript-eslint/parser",
 	"root": true,
 	"rules": {
 		"semi": "off",
@@ -26,6 +28,8 @@
 		"indent": "off",
 		"no-plusplus": "off",
 		"no-tabs": "off",
+		"import/no-import-module-exports": "off",
+		"import/no-unresolved": "off",
 		"consistent-return": "off",
 		"object-curly-newline": "off",
 		"linebreak-style": "off",
@@ -53,6 +57,7 @@
 		"radix": "off",
 		"prefer-destructuring": "off",
 		"@typescript-eslint/ban-ts-comment": "off",
-		"@typescript-eslint/ban-types": "off"
+		"@typescript-eslint/ban-types": "off",
+		"import/extensions": "off"
 	}
 }

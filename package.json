@@ -2,7 +2,6 @@
 	"name": "blog-platform-backend",
 	"version": "1.0.0",
 	"main": "index.js",
-	"type": "module",
 	"description": "Blog platform backend (MERN stack)",
 	"repository": "https://github.com/jsinkx/blog-platform-backend.git",
 	"license": "MIT",
