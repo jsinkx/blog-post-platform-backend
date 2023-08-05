@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
 
@@ -8,6 +9,7 @@ import usersRouter from './routes/usersRouter.js'
 const app = express()
 
 // Middlewares
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
