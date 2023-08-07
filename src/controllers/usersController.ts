@@ -1,5 +1,4 @@
 import type { Request, Response } from 'express'
-import mongoose from 'mongoose'
 
 import { TypedRequestParams } from '../interfaces/TypedRequest'
 
@@ -16,7 +15,7 @@ export const getUsers = async (_req: Request<{}>, res: Response) => {
 		const users = await User.find({}, disabledUserProperties)
 
 		res.status(200).json(users)
-	} catch (err) {
+	} catch {
 		res.status(500).json({ message: 'Failed to get users, try again later' })
 	}
 }
@@ -32,23 +31,11 @@ export const getUserById = async (
 	try {
 		const { id } = req.params
 
-		if (!id) {
-			res.status(400).json({ message: 'Please provide id to get user' })
-			return
-		}
-
-		if (!mongoose.Types.ObjectId.isValid(id)) {
-			res.status(400).json({ message: 'Please provide valid id to get user' })
-			return
-		}
-
 		const user = await User.findById(id, disabledUserProperties)
 
-		if (user) {
-			res.status(200).json(user)
-		} else {
-			res.status(404).json({ message: 'Failed to get this user' })
-		}
+		if (user) return res.status(200).json(user)
+
+		res.status(404).json({ message: 'Failed to get this user' })
 	} catch {
 		res.status(500).json({ message: 'Failed to get user, try again later' })
 	}

@@ -35,13 +35,6 @@ export const authRegister = async (
 	try {
 		const { username, firstName, lastName, patronymic, email, password, avatar } = req.body
 
-		// TODO: In future use express-validation instead this shit
-		if (!(username && firstName && email && password)) {
-			return res.status(400).json({
-				message: 'Please provide all fields',
-			})
-		}
-
 		const salt = await bcrypt.genSalt(10)
 		const passwordHash = await bcrypt.hash(password, salt)
 
@@ -75,10 +68,6 @@ export const authRegister = async (
 export const authLogin = async (req: TypedRequestBody<AuthLoginBody>, res: Response) => {
 	try {
 		const { username, password } = req.body
-
-		if (!(username && password)) {
-			return res.status(400).json({ message: 'Please provide username and password' })
-		}
 
 		const user = (await User.findOne({
 			username,

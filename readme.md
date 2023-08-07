@@ -26,8 +26,11 @@ yarn install
 ## Stack (backend)
 
 - Express
+- express-validator
 - MongoDB
 - Multer
+- bcrypt
+- JWT
 
 ## Configuration
 
