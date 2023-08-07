@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 
 import { TypedRequestParams } from '../interfaces/TypedRequest'
 
+import disableUserProperties from '../shared/disabled-user-properties'
+
 import User from '../models/User'
 
 /**
@@ -11,7 +13,7 @@ import User from '../models/User'
  */
 export const getUsers = async (_req: Request<{}>, res: Response) => {
 	try {
-		const users = await User.find({})
+		const users = await User.find({}, disableUserProperties)
 
 		res.status(200).json(users)
 	} catch (err) {
@@ -40,9 +42,13 @@ export const getUserById = async (
 			return
 		}
 
-		const user = await User.findById(id)
+		const user = await User.findById(id, disableUserProperties)
 
-		res.status(200).json(user)
+		if (user) {
+			res.status(200).json(user)
+		} else {
+			res.status(404).json({ message: 'Failed to get this user' })
+		}
 	} catch (err) {
 		res.status(500).json({ message: 'Failed to get user, try again later' })
 	}

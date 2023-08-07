@@ -1,13 +1,14 @@
 import mongoose from 'mongoose'
 
-interface IUser {
+interface IUser extends Document {
+	username: string
 	firstName: string
-	lastName: string
-	patronymic: string
+	lastName?: string
+	patronymic?: string
 	email: string
 	passwordHash: string
 	avatar?: string
-	posts: mongoose.Schema.Types.ObjectId
-	blogs: mongoose.Schema.Types.ObjectId
+	posts: mongoose.Schema.Types.ObjectId[]
+	blogs: mongoose.Schema.Types.ObjectId[]
 }
 export default IUser

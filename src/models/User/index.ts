@@ -4,17 +4,22 @@ import IUser from './types'
 
 const UserSchema = new mongoose.Schema<IUser>(
 	{
+		username: {
+			type: String,
+			unique: true,
+			required: true,
+		},
 		firstName: {
 			type: String,
 			required: true,
 		},
 		lastName: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		patronymic: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		email: {
 			type: String,
@@ -30,12 +35,12 @@ const UserSchema = new mongoose.Schema<IUser>(
 			required: false,
 		},
 		posts: {
-			type: mongoose.Schema.Types.ObjectId,
+			type: [mongoose.Schema.Types.ObjectId],
 			ref: 'Post',
 			required: true,
 		},
 		blogs: {
-			type: mongoose.Schema.Types.ObjectId,
+			type: [mongoose.Schema.Types.ObjectId],
 			ref: 'Blog',
 			required: true,
 		},
