@@ -1,6 +1,6 @@
-const disableUserProperties = {
+const disabledUserProperties = {
 	__v: 0,
 	passwordHash: 0,
 }
 
-export default disableUserProperties
+export default disabledUserProperties

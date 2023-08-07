@@ -7,7 +7,7 @@ import type IUser from '../models/User/types'
 import { TypedRequestBody, TypedRequestHeaders } from '../interfaces/TypedRequest'
 
 import { SECRET } from '../shared/constants'
-import disableUserProperties from '../shared/disabled-user-properties'
+import disabledUserProperties from '../shared/disabled-user-properties'
 
 import User from '../models/User'
 
@@ -126,7 +126,7 @@ export const authMe = async (req: TypedRequestHeaders<AuthMeHeaders>, res: Respo
 		if (token) {
 			const decode = jwt.verify(token, SECRET) as unknown as { _id: string }
 
-			const user = await User.findById(decode._id, disableUserProperties)
+			const user = await User.findById(decode._id, disabledUserProperties)
 
 			return res.status(200).json(user)
 		}
