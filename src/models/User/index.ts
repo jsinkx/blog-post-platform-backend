@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema<IUser>(
 			type: String,
 			required: true,
 		},
-		avatar: {
+		avatarUrl: {
 			type: String,
 			required: false,
 		},

@@ -4,11 +4,11 @@ import jwt from 'jsonwebtoken'
 
 import type IUser from '../models/User/types'
 
-import { TypedRequestBody, TypedRequestHeaders } from '../interfaces/TypedRequest'
+import { TypedRequestBody } from '../interfaces/TypedRequest'
 
 import { SECRET } from '../shared/constants'
-import disabledUserProperties from '../shared/disabled-user-properties'
 
+import { IsAuthedReq } from '../middlewares/is-authed'
 import User from '../models/User'
 
 type AuthRegisterBody = Omit<IUser, 'posts' | 'blogs' | 'passwordHash'> & {
@@ -20,10 +20,6 @@ type AuthLoginBody = {
 	password: string
 }
 
-type AuthMeHeaders = {
-	authorization?: string
-}
-
 /**
  * @route Post
  * @description Register account
@@ -33,7 +29,7 @@ export const authRegister = async (
 	res: Response,
 ) => {
 	try {
-		const { username, firstName, lastName, patronymic, email, password, avatar } = req.body
+		const { username, firstName, lastName, patronymic, email, password } = req.body
 
 		const salt = await bcrypt.genSalt(10)
 		const passwordHash = await bcrypt.hash(password, salt)
@@ -45,7 +41,7 @@ export const authRegister = async (
 			patronymic: patronymic || '',
 			email,
 			passwordHash,
-			avatar: avatar || '/default-avatars/default-avatar-question.png',
+			avatarUrl: '/avatars/default-avatars/default-avatar-question.png',
 			posts: [],
 			blogs: [],
 		})) as unknown as IUser & { _doc: IUser & { __v: string; _id: string } }
@@ -108,19 +104,9 @@ export const authLogin = async (req: TypedRequestBody<AuthLoginBody>, res: Respo
  * @route GET
  * @description Getting is user authenticated
  */
-export const authMe = async (req: TypedRequestHeaders<AuthMeHeaders>, res: Response) => {
+export const authMe = (req: IsAuthedReq, res: Response) => {
 	try {
-		const token = (req.headers.authorization || '').replace(/Bearer\s?/, '')
-
-		if (token) {
-			const decode = jwt.verify(token, SECRET) as unknown as { _id: string }
-
-			const user = await User.findById(decode._id, disabledUserProperties)
-
-			return res.status(200).json(user)
-		}
-
-		throw Error
+		res.status(200).json(req.user)
 	} catch {
 		res.status(500).json({ message: 'Failed to auth, try again later' })
 	}

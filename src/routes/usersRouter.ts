@@ -3,12 +3,12 @@ import express from 'express'
 import handleValidationErrors from '../utils/handle-validations-error'
 
 import { getUserById, getUsers } from '../controllers/usersController'
-import getUserByIdValidation from '../validations/user/get-user-by-id-validation'
+import getUserByIdValidations from '../validations/users/get-user-by-id-validations'
 
 const router = express.Router()
 
 router.get('/', getUsers)
 
-router.get('/:id', getUserByIdValidation, handleValidationErrors, getUserById)
+router.get('/:id', getUserByIdValidations, handleValidationErrors, getUserById)
 
 export default router

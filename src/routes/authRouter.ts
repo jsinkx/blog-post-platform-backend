@@ -3,15 +3,16 @@ import express from 'express'
 import handleValidationErrors from '../utils/handle-validations-error'
 
 import { authLogin, authMe, authRegister } from '../controllers/authController'
-import authLoginValidation from '../validations/auth/auth-login-validation'
-import authRegisterValidation from '../validations/auth/auth-register-validation'
+import { isAuthed } from '../middlewares/is-authed'
+import authLoginValidations from '../validations/auth/auth-login-validations'
+import authRegisterValidations from '../validations/auth/auth-register-validations'
 
 const router = express.Router()
 
-router.post('/register', authRegisterValidation, handleValidationErrors, authRegister)
+router.post('/register', authRegisterValidations, handleValidationErrors, authRegister)
 
-router.post('/login', authLoginValidation, handleValidationErrors, authLogin)
+router.post('/login', authLoginValidations, handleValidationErrors, authLogin)
 
-router.get('/me', authMe)
+router.get('/me', isAuthed, authMe)
 
 export default router

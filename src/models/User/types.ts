@@ -7,7 +7,7 @@ interface IUser extends Document {
 	patronymic?: string
 	email: string
 	passwordHash: string
-	avatar?: string
+	avatarUrl?: string
 	posts: mongoose.Schema.Types.ObjectId[]
 	blogs: mongoose.Schema.Types.ObjectId[]
 }
