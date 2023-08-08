@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import { DB_URL, PORT } from './shared/constants.js'
 
 import authRouter from './routes/authRouter.js'
+import defaultAvatarsRouter from './routes/defaultAvatarsRouters.js'
 import usersRouter from './routes/usersRouter.js'
 
 const app = express()
@@ -20,6 +21,7 @@ app.use('/default-avatars', express.static('./static/default-avatars'))
 // Connect routes
 app.use('/api/users', usersRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/default-avatars', defaultAvatarsRouter)
 
 mongoose
 	.connect(DB_URL)
