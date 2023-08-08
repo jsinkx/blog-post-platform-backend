@@ -34,4 +34,5 @@ yarn install
 
 ## Configuration
 
-Port and mongoDB url is located in `.env`
+Example of config is `.env.example`, but should use normal file\
+Env integration in js located in `./src/shared/constants.ts`
