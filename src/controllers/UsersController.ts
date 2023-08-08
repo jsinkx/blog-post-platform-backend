@@ -1,9 +1,12 @@
 import type { Request, Response } from 'express'
 
-import { TypedRequestParams } from '../interfaces/TypedRequest'
+import IUser from '../models/User/types'
+
+import { TypedRequestBody, TypedRequestParams } from '../interfaces/TypedRequest'
 
 import disabledUserProperties from '../shared/disabled-user-properties'
 
+import { IsAuthedReq } from '../middlewares/is-authed'
 import User from '../models/User'
 
 /**
@@ -38,5 +41,44 @@ export const getUserById = async (
 		res.status(404).json({ message: 'Failed to get this user' })
 	} catch {
 		res.status(500).json({ message: 'Failed to get user, try again later' })
+	}
+}
+
+type EditUserRequestBody = Omit<IUser, 'passwordHash' | 'posts' | 'blogs'>
+
+/**
+ * @route PATCH
+ * @description Edit profile
+ */
+export const editUser = async (
+	req: IsAuthedReq & TypedRequestBody<EditUserRequestBody>,
+	res: Response,
+) => {
+	try {
+		const id = String(req?.user?._id)
+
+		const { username, firstName, lastName, patronymic, email, avatarUrl } = req.body
+
+		if (id) {
+			const updatedUser = await User.findByIdAndUpdate(
+				id,
+				{
+					username,
+					firstName,
+					lastName,
+					patronymic,
+					email,
+					avatarUrl,
+				},
+				{ new: true },
+			).select('-__v -passwordHash')
+
+			return res.status(200).json(updatedUser)
+		}
+
+		throw Error
+	} catch (e) {
+		console.log(e)
+		res.status(500).json({ message: 'Failed edit user profile, try again later' })
 	}
 }
