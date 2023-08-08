@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { getAllDefaultAvatars, uploadAvatar } from '../controllers/avatarsController'
+import { getAllDefaultAvatars, uploadAvatar } from '../controllers/AvatarsController'
 import { isAuthed } from '../middlewares/is-authed'
 
 const router = express.Router()

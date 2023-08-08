@@ -2,7 +2,7 @@ import express from 'express'
 
 import handleValidationErrors from '../utils/handle-validations-error'
 
-import { getUserById, getUsers } from '../controllers/usersController'
+import { getUserById, getUsers } from '../controllers/UsersController'
 import getUserByIdValidations from '../validations/users/get-user-by-id-validations'
 
 const router = express.Router()

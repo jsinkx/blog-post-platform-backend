@@ -4,9 +4,9 @@ import mongoose from 'mongoose'
 
 import { DB_URL, PORT } from './shared/constants.js'
 
-import authRouter from './routes/authRouter.js'
-import defaultAvatarsRouter from './routes/avatarsRouter.js'
-import usersRouter from './routes/usersRouter.js'
+import authRouter from './routes/authRoutes.js'
+import defaultAvatarsRouter from './routes/avatarsRoutes.js'
+import usersRouter from './routes/usersRoutes.js'
 
 const app = express()
 

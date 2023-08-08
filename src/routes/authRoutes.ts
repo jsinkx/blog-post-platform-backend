@@ -2,7 +2,7 @@ import express from 'express'
 
 import handleValidationErrors from '../utils/handle-validations-error'
 
-import { authLogin, authMe, authRegister } from '../controllers/authController'
+import { authLogin, authMe, authRegister } from '../controllers/AuthController'
 import { isAuthed } from '../middlewares/is-authed'
 import authLoginValidations from '../validations/auth/auth-login-validations'
 import authRegisterValidations from '../validations/auth/auth-register-validations'
