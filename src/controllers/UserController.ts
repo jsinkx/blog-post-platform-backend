@@ -9,6 +9,8 @@ import disabledUserProperties from '../shared/disabled-user-properties'
 import { IsAuthedReq } from '../middlewares/is-authed'
 import User from '../models/User'
 
+type EditUserRequestBody = Omit<IUser, 'passwordHash' | 'posts' | 'blogs'>
+
 /**
  * @route GET
  * @description Getting all users
@@ -44,8 +46,6 @@ export const getUserById = async (
 	}
 }
 
-type EditUserRequestBody = Omit<IUser, 'passwordHash' | 'posts' | 'blogs'>
-
 /**
  * @route PATCH
  * @description Edit profile
@@ -57,7 +57,7 @@ export const editUser = async (
 	try {
 		const id = String(req?.user?._id)
 
-		const { username, firstName, lastName, patronymic, email, avatarUrl } = req.body
+		const { username, firstName, lastName, patronymic, avatarUrl } = req.body
 
 		if (id) {
 			const updatedUser = await User.findByIdAndUpdate(
@@ -67,7 +67,6 @@ export const editUser = async (
 					firstName,
 					lastName,
 					patronymic,
-					email,
 					avatarUrl,
 				},
 				{ new: true },
@@ -77,8 +76,7 @@ export const editUser = async (
 		}
 
 		throw Error
-	} catch (e) {
-		console.log(e)
+	} catch {
 		res.status(500).json({ message: 'Failed edit user profile, try again later' })
 	}
 }
