@@ -11,8 +11,8 @@
 		"eslint:recommended",
 		"plugin:import/errors",
 		"plugin:import/warnings",
-		"plugin:prettier/recommended",
 		"plugin:import/typescript",
+		"plugin:prettier/recommended",
 		"prettier"
 	],
 	"plugins": [
@@ -43,11 +43,9 @@
 		"no-fallthrough": 1,
 		"no-extra-boolean-cast": 1,
 		"prettier/prettier": [
-			"error",
-			{
-				"endOfLine": "auto"
-			}
+			"off"
 		],
+		"end-of-line": "off",
 		"arrow-parens": "off",
 		"no-mixed-operators": "off",
 		"arrow-body-style": "off",

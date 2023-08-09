@@ -7,6 +7,7 @@ import { TypedRequestBody, TypedRequestParams } from '../interfaces/TypedRequest
 import disabledUserProperties from '../shared/disabled-user-properties'
 
 import { IsAuthedReq } from '../middlewares/is-authed'
+
 import User from '../models/User'
 
 type EditUserRequestBody = Omit<IUser, 'passwordHash' | 'posts' | 'blogs'>

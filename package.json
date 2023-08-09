@@ -10,7 +10,7 @@
 		"server": "node dist/index.js",
 		"dev": "concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
 		"lint": "eslint --color",
-		"lint:fix": "lint --fix",
+		"lint:fix": "yarn lint --fix",
 		"prepare": "husky install",
 		"precommit": "lint-staged"
 	},

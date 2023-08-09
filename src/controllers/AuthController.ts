@@ -9,6 +9,7 @@ import { TypedRequestBody } from '../interfaces/TypedRequest'
 import { SECRET } from '../shared/constants'
 
 import { IsAuthedReq } from '../middlewares/is-authed'
+
 import User from '../models/User'
 
 type AuthRegisterBody = Omit<IUser, 'posts' | 'blogs' | 'passwordHash'> & {
