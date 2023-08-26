@@ -1,4 +1,4 @@
-# Blog platform backend
+# Blog post platform backend
 
 ---
 

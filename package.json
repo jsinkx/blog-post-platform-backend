@@ -1,8 +1,8 @@
 {
-	"name": "blog-platform-backend",
+	"name": "blog-post-platform-backend",
 	"version": "1.0.0",
 	"main": "index.js",
-	"description": "Blog platform backend (MERN stack)",
+	"description": "Blog post platform backend. CRUD microservice",
 	"repository": "https://github.com/jsinkx/blog-platform-backend.git",
 	"license": "MIT",
 	"scripts": {
