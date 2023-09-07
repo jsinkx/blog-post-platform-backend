@@ -78,6 +78,20 @@ export const editUser = async (
 
 		throw Error
 	} catch {
-		res.status(500).json({ message: 'Failed edit user profile, try again later' })
+		res.status(500).json({ message: 'Failed to edit user profile, try again later' })
+	}
+}
+
+/**
+ * @route POST
+ * @description Check is values for user available
+ */
+export const checkIsAvailableUser = async (_: Request, res: Response) => {
+	try {
+		res.status(200).json({ message: 'Available' })
+	} catch {
+		res
+			.status(500)
+			.json({ message: 'Failed to check is available user profile fields, try again later' })
 	}
 }
